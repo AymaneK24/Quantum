@@ -2,7 +2,7 @@
 
 ## Black Scholes : Calculation of Call Options pricer
 
-- European style +
+- to know the price of the call option today but not for complexe call options
 
 ## Monte-Carlo
 
@@ -15,16 +15,20 @@ error = (some fixed number) ÷ √(number of futures)
 To divide the error by k, multiply the futures by k × k.
 bach n9so l error , awla bach n9smoha 3la 2 khasna 2 _ 2 _ ch7al mn future bach 7sbna l error l9dima dylana
 
----
+|error | futures
 
-## error | futures
+| 0.04 | 1000
 
-## 0.04 | 1000
+| 0.02 | 2*2*1000 = 4000
 
-## 0.02 | 2*2*1000 = 4000
-
+the process:
 Imagine one realistic future price (steady push + luck).
 Calculate what the paper pays in that future.
 Repeat thousands of times.
 Average all the payoffs.
 Shrink the average to today’s money.
+
+Monte Carlo, European call, 10,000,000 futures (pure Python, 1 thread):
+
+- Time: 16.1 s (best of 3)
+- Price: 10.4530 ± 0.0047 (Black-Scholes: 10.4506)
