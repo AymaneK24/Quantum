@@ -1,5 +1,6 @@
 from black_scholes import bs_call, call_payoff, put_payoff, bs_put
-
+import random
+from monte_carlo import mc_call, mc_put
 
 def test_call_payoff():
     assert call_payoff(130, 100) == 30
@@ -25,3 +26,19 @@ def test_put_is_never_negative():
     assert bs_put(100, 100, 1.0, 0.05, 0.20) >= 0
     assert bs_put(150, 100, 1.0, 0.05, 0.20) >= 0
     assert bs_put(50, 100, 1.0, 0.05, 0.20) >= 0
+
+
+def test_mc_call_agrees_with_black_scholes():
+    random.seed(42)
+    exact = bs_call(100, 100, 1.0, 0.05, 0.20)
+    price, error = mc_call(100, 100, 1.0, 0.05, 0.20, 100000)
+    assert abs(price - exact) < 3 * error
+
+
+def test_mc_put_agrees_with_black_scholes():
+    random.seed(42)
+    exact = bs_put(100, 100, 1.0, 0.05, 0.20)
+    price, error = mc_put(100, 100, 1.0, 0.05, 0.20, 100000)
+    assert abs(price - exact) < 3 * error
+
+    
