@@ -64,9 +64,9 @@ def testit(L):
     return 0    
 
 
-
-print("Testing it with [10,100,1000,1000000]:")
-testit([10,100,1000,10000000])
+if __name__ == "__main__":
+    print("Testing it with [10,100,1000,1000000]:")
+    testit([10,100,1000,10000000])
 
 
 
