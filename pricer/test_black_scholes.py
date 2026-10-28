@@ -1,0 +1,27 @@
+from black_scholes import bs_call, call_payoff, put_payoff, bs_put
+
+
+def test_call_payoff():
+    assert call_payoff(130, 100) == 30
+    assert call_payoff(80, 100) == 0
+
+
+def test_put_payoff():
+    assert put_payoff(60, 100) == 40
+    assert put_payoff(120, 100) == 0
+
+
+def test_bs_call_known_value():
+    price = bs_call(100, 100, 1.0, 0.05, 0.20)
+    assert abs(price - 10.4506) < 0.0001
+
+
+def test_bs_put_known_value():
+    price = bs_put(100, 100, 1.0, 0.05, 0.20)
+    assert abs(price - 5.5735) < 0.0001
+
+
+def test_put_is_never_negative():
+    assert bs_put(100, 100, 1.0, 0.05, 0.20) >= 0
+    assert bs_put(150, 100, 1.0, 0.05, 0.20) >= 0
+    assert bs_put(50, 100, 1.0, 0.05, 0.20) >= 0
